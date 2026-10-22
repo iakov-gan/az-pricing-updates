@@ -3,6 +3,10 @@
 Calculate regional and legacy VM price-change impacts from Azure usage exports,
 with optional price protection and Reserved Instance forecasting.
 
+**First time using the tool?** Follow the [Customer guide](CUSTOMER_GUIDE.md)
+for the dependency order, EA/MCA input downloads, installation, full-run
+commands and result checks. See [Permissions](PERMISSIONS.md) for access roles.
+
 > **Disclaimer:** Although the Azure Pricing Impact Report is developed by
 > Microsoft employees, it is not a Microsoft service or product. It is an
 > independently driven project. There are no implicit or explicit obligations
@@ -20,6 +24,39 @@ with optional price protection and Reserved Instance forecasting.
 The entry point
 is `pricing_updates.impact_report`; the modules under `core` are included
 dependencies, not separate tools.
+
+## Inputs and output at a glance
+
+```mermaid
+flowchart LR
+    subgraph inputs["Customer downloads from Azure before running"]
+        usage["Amortized usage - required<br/>One full calendar month<br/>CSV or Parquet"]
+        prices["Contract pricesheet - optional<br/>CSV or Parquet"]
+        reservations["Reservation inventory - optional<br/>CSV"]
+    end
+
+    subgraph local["Local processing - no billing files uploaded"]
+        report["Python report generator<br/>pricing_updates.impact_report"]
+        workbook["Excel workbook<br/>VM and Storage impact<br/>Contract pricing and price protection when enabled<br/>RI forecast when enabled"]
+        report --> workbook
+    end
+
+    usage --> report
+    prices -.-> report
+    reservations -.-> report
+    azure["Optional live Azure lookup<br/>EA department OR management-group hierarchy<br/>Requires Azure CLI login and read access"]
+    azure -.->|"Business-entity grouping"| report
+    workbook --> excel["Open in Excel<br/>Recalculate formulas and review results"]
+```
+
+**Basic report:** usage only. **Price protection:** usage + pricesheet.
+**RI forecast:** usage with VM reservation data + pricesheet + reservation
+inventory. Optional inputs enable features through the corresponding command
+options; see [Parameters](#parameters).
+
+The tool does **not** download the input files automatically. Without
+`--business-entity-method`, report generation runs offline on your files and
+requires no Azure login.
 
 ## Announcement scope
 
@@ -63,6 +100,10 @@ is still possible:
 | Dv3, Dsv3, Ev3, Esv3 | 15 November 2029 | [Azure update 572346](https://azure.microsoft.com/en-us/updates/?id=572346) |
 
 ## Prerequisites
+
+See [Permissions](PERMISSIONS.md) for the read-only roles and scopes needed
+to download all inputs and use optional live business-entity lookups.
+Running on existing files requires no Azure permissions or login.
 
 - Python 3.10 or newer, and Git (or download the repository as a ZIP).
 - Azure CLI ([install guide](https://learn.microsoft.com/cli/azure/install-azure-cli)),
