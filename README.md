@@ -7,7 +7,7 @@ with optional price protection and Reserved Instance forecasting.
 for the dependency order, EA/MCA input downloads, installation, full-run
 commands and result checks. See [Permissions](PERMISSIONS.md) for access roles.
 
-> [!CAUTION]
+> [!IMPORTANT]
 > Although the Azure Pricing Impact Report is developed by
 > Microsoft employees, it is not a Microsoft service or product. It is an
 > independently driven project. There are no implicit or explicit obligations
