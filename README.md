@@ -7,6 +7,7 @@ with optional price protection and Reserved Instance forecasting.
 for the dependency order, EA/MCA input downloads, installation, full-run
 commands and result checks. See [Permissions](PERMISSIONS.md) for access roles.
 
+> [!WARNING]
 > **Disclaimer:** Although the Azure Pricing Impact Report is developed by
 > Microsoft employees, it is not a Microsoft service or product. It is an
 > independently driven project. There are no implicit or explicit obligations
@@ -66,23 +67,23 @@ reflects that announcement only. If a later announcement changes the scope,
 rates or dates, the tool must be updated accordingly (see
 [How the announcement is implemented](#how-the-announcement-is-implemented)).
 
+**Legacy VM series, about 25% from 1 February 2027** (all regions):
+
+- v1: Bv1, D, Ds, F, Fs, G, Gs, Ls, NP, HC.
+- v2: Av2, Amv2, Dv2, Dsv2, Fsv2, Lsv2.
+
 **Regional price update, from 1 February 2027.** Specific Azure Virtual
 Machines and Azure Storage services are adjusted in these regions, with
 increases ranging from 8% to 17% depending on the region: EU West, EU North, France Central, France South, Norway East, Norway West, Southeast Asia.
 
 Announced as not covered by the regional update:
 
-- VM series: v1 and v2 (they get the legacy increase below) and v7 Dsv7, Ddsv7,
+- VM series: v1 and v2 (they get the legacy increase above) and v7 Dsv7, Ddsv7,
   Dlsv7, Dldsv7, Esv7, Edsv7.
 - Storage: Azure Container Storage, Azure Managed Lustre, Azure NetApp Files
   Cross Region Replication SKU, Blob Features, Change Feed, General Block Blob,
   Import/Export, Queues, Queues v2, Standard Page Blob, Storage Actions,
   Storage Bandwidth, Storage Discovery, Tables, Transaction Optimized SKU.
-
-**Legacy VM series, about 25% from 1 February 2027** (all regions):
-
-- v1: Bv1, D, Ds, F, Fs, G, Gs, Ls, NP, HC.
-- v2: Av2, Amv2, Dv2, Dsv2, Fsv2, Lsv2.
 
 These increases apply to pay-as-you-go, Enterprise Agreement and Microsoft
 Customer Agreement rates. Existing Reserved Instances (RIs) are not affected
